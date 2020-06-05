@@ -29,7 +29,7 @@ let controller = function() {
       //add comment to db
       $.ajax({
           method: "POST",
-          url: "http://localhost:8888/addcomment",
+          url: "http://localhost:8888/addtodo",
           data: {
             data: content
           }
