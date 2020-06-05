@@ -100,6 +100,6 @@ $(document).ready(() => {
   btn02 = document.querySelectorAll('button')[2];
   btn02.addEventListener('click', deleteComment);
   btn01 = document.querySelectorAll('button')[1];
-  btn01.addEventListener('click', getComment);
+  btn01.addEventListener('click', getToDo);
   controller();
 });
