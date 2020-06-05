@@ -12,8 +12,8 @@ const
   dbURL = 'mongodb://127.0.0.1:27017',
   MongoClient = require('mongodb').MongoClient,
   client = new MongoClient(dbURL),
-  dbName = 'commentsDB',
-  collName = 'comments';
+  dbName = 'todoDB',
+  collName = 'todos';
 
 let db, col, key = 0;
 
@@ -45,20 +45,20 @@ app.use((req, res, next) => {
 });
 
 // endpoint to Get all comments
-app.get('/comments', (req, res) => {
+app.get('/todos', (req, res) => {
   db.collection(collName).find({}).toArray(function(err, result) {
     if (err) throw err;
     //console.log(result);
     res.status(200).send({
       success: 'true',
-      message: 'comments retrieved successfully',
-      comments: result
+      message: 'todos retrieved successfully',
+      todos: result
     })
   })
 });
 
 //endpoint to get a single comment
-app.get('/getcomment/:data', (req, res, next) => {
+app.get('/gettodo/:data', (req, res, next) => {
   const data = req.params.data;
 
   db.collection(collName).findOne({
@@ -75,19 +75,19 @@ app.get('/getcomment/:data', (req, res, next) => {
 
 
 //Endpoint to add a comment
-app.post('/addcomment', (req, res) => {
+app.post('/addtodo', (req, res) => {
   // Insert a single document
-  let comment = {
+  let todo = {
     data: req.body.data
   }
 
-  db.collection(collName).insertOne(comment)
+  db.collection(collName).insertOne(todo)
     .then(result => {
       console.log(`record inserted ${result}`)
       return res.status(201).send({
         status_code: 200,
-        message: 'Comment added successfully',
-        comment
+        message: 'Todo added successfully',
+        todo
       })
     })
     .catch(error => console.error(error))
@@ -107,7 +107,7 @@ app.post('/deletecomment/:data', (req, res) => {
 
   return res.status(200).send({
     status_code: 200,
-    message: "comment deleted",
+    message: "todo deleted",
   })
 });
 
