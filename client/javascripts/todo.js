@@ -85,8 +85,17 @@ let getToDo = () => {
   //window.location.reload();
 }
 
+
 let deleteAll = () => {
-  //delete all comments from db
+  let content = $("#deleteAll").val();
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8888/deleteAll/" + content
+      })
+      .done(function(msg) {
+        console.log("Comment deleted: " + msg);
+      });
+
   localStorage.removeItem("commentsList")
   window.location.reload();
 }
